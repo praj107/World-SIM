@@ -9,6 +9,8 @@ import numpy as np
 import time
 import json
 import noise
+from custom_modules import wmaputils as wmu
+
 
 def bas_map_heatmap_det(WM, v, args):
     #ca = WM.array.flatten()
@@ -26,7 +28,8 @@ def bas_map_heatmap_det(WM, v, args):
         return "#FFFFFF"
 
 def bas_map_vis(WM):
-    ca = WM.array.flatten()
+    
+    ca = wmu.downsample_array(WM.array).flatten()
     tt = WM.settings["TileTypes"]
     a1, a2, a3 = tt["Oceans"]["allocation"],(tt["Oceans"]["allocation"]+tt["Coasts"]["allocation"]),(tt["Oceans"]["allocation"]+tt["Coasts"]["allocation"]+tt["Plains"]["allocation"])
     q1, q2, q3 = np.percentile(ca,a1), np.percentile(ca, a2), np.percentile(ca, a3)

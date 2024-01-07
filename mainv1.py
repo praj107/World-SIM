@@ -32,14 +32,10 @@ class MySQLAccessGUI(wcb.Basics):
         self.LFrame.pack_propagate(0)
         self.RFrame.pack(side=tk.RIGHT)
         self.RFrame.pack_propagate(0)
-        
-        
-        # self.console_label = tk.Label(self.LFrame, text="Console:")
-        # self.console_label.pack(side=tk.TOP,fill=tk.X,expand=True)
-        # self.console_entry = tk.Entry(self.LFrame)
-        # self.console_entry.pack(side=tk.LEFT,fill=tk.X,expand=True)
+
         self.console = wmt.TerminalWidget(self.LFrame)
         self.console.pack(side=tk.TOP, fill=tk.BOTH)
+        
         # World Sim Canvas
         self.map = wmc.WorldMap(self.RFrame)
         self.console.connect_map(self.map)

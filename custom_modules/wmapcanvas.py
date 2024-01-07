@@ -24,7 +24,7 @@ class WorldMap(wcb.Basics):
         self.height = height
         self.array = np.zeros((self.width,self.height))
         self.objects = []
-        self.sq_size = 3
+        self.sq_size = 4
         self.current_map_stats = None
         
         
@@ -33,7 +33,8 @@ class WorldMap(wcb.Basics):
         
         
     def generate_map(self):
-        self.offsets = wmp.gen_basic_map_layer(self.array)
+        self.offsets = (0,0,0)
+        self.array = wmp.gen_basic_map_layer(self.array)
         #print(self.array)
         self.current_map_stats = wmv.bas_map_vis(self)
         print(self.current_map_stats)
