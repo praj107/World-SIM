@@ -29,7 +29,7 @@ def bas_map_heatmap_det(WM, v, args):
 
 def bas_map_vis(WM):
     
-    ca = wmu.downsample_array(WM.array).flatten()
+    ca = wmu.downsample_array(WM.array, factor = 16).flatten()
     tt = WM.settings["TileTypes"]
     a1, a2, a3 = tt["Oceans"]["allocation"],(tt["Oceans"]["allocation"]+tt["Coasts"]["allocation"]),(tt["Oceans"]["allocation"]+tt["Coasts"]["allocation"]+tt["Plains"]["allocation"])
     q1, q2, q3 = np.percentile(ca,a1), np.percentile(ca, a2), np.percentile(ca, a3)

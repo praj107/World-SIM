@@ -99,7 +99,7 @@ class TerminalWidget(tk.Canvas,wcb.Basics):
             return
         else:
             points = self.regions_analysis.get(region)
-            print(f"POINT EXAMPLE: {points[0]}")
+            #print(f"POINT EXAMPLE: {points[0]}")
             #points = [(x[0]*(self.sq_size-2),x[1]*(self.sq_size-2)) for x in points]
             min_y = min(point[0] for point in points)
             min_x = min(point[1] for point in points)
@@ -108,14 +108,16 @@ class TerminalWidget(tk.Canvas,wcb.Basics):
             self.cout(f"Region coordset: x0 = {min_x}, y0 = {min_y},x1 = {max_x}, y1 = {max_y}.s")
             highlight_bbox = self.map_canvas.create_rectangle(min_x,min_y,max_x,max_y,outline='red',width=10)
             for p in points:
-                y0, x0 = p
+                x0, y0 = p[0]*4,p[1]*4
                 self.map_canvas.create_rectangle(x0,y0,x0+4,y0+4, fill='red',width=0)
             # self.map_canvas.tag_configure("transparent", alpha=0.8)
             # self.map_canvas.itemconfig(highlight_bbox, tags=("transparent",))
             return
     def map_analysis(self):
         raw_arr = self.WM.gAttb("array")
-        arr = wcu.downsample_array(raw_arr)
+        self.cout(f"Array Initial Shape: {raw_arr.shape}")
+        arr = wcu.downsample_array(raw_arr,factor=16)
+        self.cout(f"Array Downsampled Shape: {arr.shape}")
         cms = self.WM.gAttb("current_map_stats")
         self.cout(f'Current Maps Stats: {str(cms)}.')
         q1, a1, q2, a2, q3, a3 = cms[0][0],cms[0][1],cms[1][0],cms[1][1],cms[2][0],cms[2][1]
