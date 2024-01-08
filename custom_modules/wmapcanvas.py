@@ -36,7 +36,8 @@ class WorldMap(wcb.Basics):
         self.offsets = (0,0,0)
         self.array = wmp.gen_basic_map_layer(self.array)
         #print(self.array)
-        self.current_map_stats = wmv.bas_map_vis(self)
+        self.MPV = wmv.MapVisualiser(self)
+        self.current_map_stats = self.MPV.bas_map_vis()
         print(self.current_map_stats)
         
 
